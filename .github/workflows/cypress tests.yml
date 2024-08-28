@@ -6,9 +6,6 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v3
-        
-        - name: Cypress run with specific specs
+        - name: Cypress run
           uses: cypress-io/github-action@v5
-          with:
-              spec: "cypress/integration/examples/api testing/*.js"
           
