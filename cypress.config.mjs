@@ -11,7 +11,7 @@ export default defineConfig({
     },
     
 
-    specPattern: 'cypress/integration/examples/api_testing/'
+    specPattern: 'cypress/integration/examples/api_testing/*.spec.js'
   
   },
   
