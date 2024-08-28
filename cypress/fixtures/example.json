@@ -1,0 +1,60 @@
+
+{
+  "urlSadaTicket" :   "https://sadaticket.com/",
+  "urlMytmTravels" :  "https://mytmtravels.com/",
+  "name":             "Zahid Nawaz",
+  "email":            "zahid.nawaz@xintsolutions.com",
+  "phone":            "3026858990",
+  "emailMytmTravels": "zahid.nawaz@xintsolutions.com",
+  "passwordMytmTravels": "zahid123",
+  "invalidEmailMytmTravels": "zahidnawaz@xintsolutions.com",
+  "invalidPasswordMytmTravels": "1234567",
+  "departure": "lhe",
+  "arrival":    "dxb",
+  "depDate":       "2023-10-10",
+  "arrDate":       "2023-12-10",
+  "noOfAdult":     "1", 
+  "noOfChild":     "1", 
+  "noOfInfant":    "0",
+  "flightClass": "Y",
+
+  "GetLogin": ".go-right",
+  
+  "__comment1": "Data About Adult1",
+
+  "title1":      "Mr", 
+  "surname1":    "Bhatti", 
+  "fname1":      "Zahid Nawaz", 
+  "dob1":        "2006-03-14", 
+  "gender1":     "Male", 
+  "nationality1":  "PAKISTAN", 
+  "DocType1":      "Passport", 
+  "DocNumber1":    "3S12345", 
+  "DocExpDate1":   "2032-10-10", 
+  "note":         "Allah Hafiz",
+
+  "__comment2": "Data About Child1",
+
+  "title2":      "Mr", 
+  "surname2":    "Bhatti", 
+  "fname2":      "Zahid Nawaz", 
+  "dob2":        "2006-03-14", 
+  "gender2":     "Male", 
+  "nationality2":  "PAKISTAN", 
+  "DocType2":      "Passport", 
+  "DocNumber2":    "3S12345", 
+  "DocExpDate2":   "2032-10-10",
+
+  "__comment3": "Data About Infan1",
+
+  "title3":      "Mr", 
+  "surname3":    "Bhatti", 
+  "fname3":      "Zahid Nawaz", 
+  "dob3":        "2006-03-14", 
+  "gender3":     "Male", 
+  "nationality3":  "PAKISTAN", 
+  "DocType3":      "Passport", 
+  "DocNumber3":    "3S12345", 
+  "DocExpDate3":   "2032-10-10"
+  
+}
