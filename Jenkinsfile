@@ -1,43 +1,25 @@
 pipeline {
     agent any
-
-    environment {
-        // Set up Node environment variables, if necessary
-        NODE_ENV = 'development'
-    }
-
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/bhattizahid/cypress-automation'
+            }
+        }
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install Cypress and other dependencies
-                    bat 'npm install'
-                }
+                bat 'npm install'
             }
         }
-
+        stage('Install Cypress') {
+            steps {
+                bat './node_modules/.bin/cypress install'
+            }
+        }
         stage('Run Cypress Tests') {
             steps {
-                script {
-                    // Run Cypress tests
-                    bat './node_modules/.bin/cypress run'
-                }
+                bat './node_modules/.bin/cypress run'
             }
-        }
-    }
-
-    post {
-        always {
-            // Archive test results and reports
-            archiveArtifacts artifacts: '**/cypress/screenshots/*, **/cypress/videos/*'
-            junit 'cypress/results/*.xml' // If using JUnit reporter
-        }
-
-        failure {
-            // Notify on failure (optional)
-            mail to: 'team@example.com',
-                 subject: "Cypress Tests Failed",
-                 body: "The Cypress tests have failed. Please check the Jenkins job for details."
         }
     }
 }
