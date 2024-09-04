@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Install Cypress and other dependencies
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Run Cypress tests
-                    sh './node_modules/.bin/cypress run'
+                    bat './node_modules/.bin/cypress run'
                 }
             }
         }
