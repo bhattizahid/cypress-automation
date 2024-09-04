@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/bhattizahid/cypress-automation'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
