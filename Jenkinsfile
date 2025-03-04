@@ -13,14 +13,9 @@ pipeline {
         }
         stage('Run Cypress Tests') {
             steps {
-                bat './node_modules/.bin/cypress run --reporter junit --reporter-options "mochaFile=results/my-test-output.xml,toConsole=true"'
+                bat './node_modules/.bin/cypress run'
             }
         }
-        stage('Archive Test Results') {
-            steps {
-                junit 'results/*.xml'
-            }
-        }
-        
+
     }
 }

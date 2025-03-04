@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.714" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2024-09-04T11:14:52" tests="0" file="cypress\e2e\api_testing\Parsing JSON Ex.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Parsing JSON Responses" timestamp="2024-09-04T11:14:52" tests="2" time="0.707" failures="0">
+    <testcase name="Parsing JSON Responses Parsing simple JSON Response" time="0.329" classname="Parsing simple JSON Response">
+    </testcase>
+    <testcase name="Parsing JSON Responses Parsing complex JSON response" time="0.301" classname="Parsing complex JSON response">
+    </testcase>
+  </testsuite>
+</testsuites>
