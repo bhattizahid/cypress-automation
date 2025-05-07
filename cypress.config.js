@@ -16,7 +16,7 @@ module.exports = defineConfig({
       device_type: "android",
       verification_code: "1290",
       receiver_account: "03101882620",
-      transaction_pin: "NzcwMDc=",
+      transaction_pin: "MTEyMjc=",
       offset : "0",
       limit : "100",
       IBFT_receiver_account: "03458721870",
@@ -28,6 +28,8 @@ module.exports = defineConfig({
       biller_id: "668",
       bill_consumer_name: "MUHAMMAD ROHAIL",
       bill_month: "June",
+      CNIC_Issue_Date: "2017-09-14",
+      CNIC_NO: "3620262728541",
       
     },
     setupNodeEvents(on, config) {

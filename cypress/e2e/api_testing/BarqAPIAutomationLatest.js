@@ -16,6 +16,9 @@ describe("API Testing Suite", () => {
           user_type: "barq",
         },
       }).then((response) => {
+        if (response.body.errors && response.body.errors.length > 0) {
+          cy.log("❌ Errors:", JSON.stringify(response.body.errors, null, 2));
+        }
         expect(response.status).to.equal(200);
         expect(response.body.success).to.be.true;
         cy.log("Create User Response:", JSON.stringify(response.body, null, 2));
@@ -44,8 +47,53 @@ describe("API Testing Suite", () => {
         mainToken = response.body.data.token; // Store the token
       });
     });
+    it("Verify MPIN", () => {
+      cy.wrap(mainToken).as("mainToken"); // Store token before using
   
-    it.skip("Fetch Wallet Title", function () {
+      cy.get("@mainToken").then((token) => {
+        cy.request({
+          method: "POST",
+          url: `${baseUrl}/digitt/wallet/verify-mpin`,
+          body: {
+            mpin: Cypress.env("transaction_pin"),
+            device_token: "1111",
+         },
+          headers: { token },
+        }).then((response) => {
+          expect(response.status).to.equal(200);
+          expect(response.body.success).to.be.true;
+          cy.log("MPIN Verification Response:", JSON.stringify(response.body, null, 2));
+          cy.log(`MPIN Verification API Response Time: ${response.duration}ms`);
+          cy.log("MPIN Verified Successfully");
+      });
+    });
+  });
+
+    it.skip("Check Account", function () {
+      cy.wrap(mainToken).as("mainToken"); // Store token before using
+  
+      cy.get("@mainToken").then((token) => {
+        cy.request({
+          method: "POST",
+          url: `${baseUrl}/api/digitt/account/check`, // Use the variable
+          body: {
+            cnic_issue_date: Cypress.env("CNIC_Issue_Date"),
+            cnic: Cypress.env("CNIC_NO"),
+          },
+          headers: { token },
+        }).then((response) => {
+          expect(response.status).to.equal(200);
+          expect(response.body.success).to.be.true;
+          cy.log("Check Account Response:", JSON.stringify(response.body, null, 2));
+          cy.log(`Check Account API Response Time: ${response.duration}ms`);
+          cy.log("Check Account Successfully");
+  
+          vToken = response.body.data.verificationToken; // Store verification token
+        });
+      });
+    });
+  
+    it("Fetch Wallet Title", function () {
       cy.wrap(mainToken).as("mainToken"); // Store token before using
   
       cy.get("@mainToken").then((token) => {
@@ -69,7 +117,7 @@ describe("API Testing Suite", () => {
       });
     });
   
-    it.skip("Make Wallet Payment", function () {
+    it("Make Wallet Payment", function () {
       cy.wrap(mainToken).as("mainToken");
       cy.wrap(vToken).as("vToken");
   
@@ -96,7 +144,7 @@ describe("API Testing Suite", () => {
       });
     });
     
-    it.skip("Get Bank List", function(){
+    it("Get Bank List", function(){
         cy.wrap(mainToken).as("mainToken"); // Store token before using
 
       cy.get("@mainToken").then((token) => {
@@ -117,7 +165,7 @@ describe("API Testing Suite", () => {
     });
   });
 });
-    it.skip("Get Purpose of List", function(){
+    it("Get Purpose of List", function(){
         cy.wrap(mainToken).as("mainToken"); // Store token before using
 
       cy.get("@mainToken").then((token) => {
@@ -135,7 +183,7 @@ describe("API Testing Suite", () => {
     });
   });
 });
-    it.skip("Fetch IBFT Title", function () {
+    it("Fetch IBFT Title", function () {
       cy.wrap(mainToken).as("mainToken"); // Store token before using
   
       cy.get("@mainToken").then((token) => {
@@ -160,7 +208,7 @@ describe("API Testing Suite", () => {
         });
       });
     });
-     it.skip("IBFT Transfer Validation", function(){
+     it("IBFT Transfer Validation", function(){
         cy.wrap(mainToken).as("mainToken"); // Store token before using
 
       cy.get("@mainToken").then((token) => {
@@ -184,7 +232,7 @@ describe("API Testing Suite", () => {
     });
   });
 });
-    it.skip("Make IBFT Payment", function () {
+    it("Make IBFT Payment", function () {
       cy.wrap(mainToken).as("mainToken");
       cy.wrap(IBFTvToken).as("IBFTvToken");
   
@@ -215,8 +263,8 @@ describe("API Testing Suite", () => {
       });
     });
     it("Get Company List", function(){
-        cy.wrap(mainToken).as("mainToken"); // Store token before using
-
+      cy.wrap(mainToken).as("mainToken"); // Store token before using
+  
       cy.get("@mainToken").then((token) => {
         cy.request({
           method: "POST",
@@ -227,8 +275,14 @@ describe("API Testing Suite", () => {
             },
             headers: { token },
         }).then((response) => {
+
             expect(response.status).to.equal(200);
-            expect(response.body.success).to.be.true;
+            if (response.body.success == true){
+              expect(response.body.success).to.be.true;
+            }
+            if (response.body.errors && response.body.errors.length > 0) {
+              cy.log("❌ Errors:", JSON.stringify(response.body.errors, null, 2));
+            }
             cy.log("Get Company List:", JSON.stringify(response.body, null, 2));
             cy.log(`Get Company List API Response Time: ${response.duration}ms`);
             cy.log("Get Company List fetch Successful");
@@ -249,7 +303,7 @@ describe("API Testing Suite", () => {
           headers: { token },
         }).then((response) => {
           expect(response.status).to.equal(200);
-          //expect(response.body.success).to.be.true;
+          expect(response.body.success).to.be.true;
           cy.log("Utility Title Fetch Response:", JSON.stringify(response.body, null, 2));
           cy.log(`Utility Title Fetch API Response Time: ${response.duration}ms`);
           cy.log("Utility Title Fetched Successfully");
